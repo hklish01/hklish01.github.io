@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AymbUmrU2biqv3r5r5FQeMjiDSc/96fDOHBdBwSIbfA='; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Stand By Me Quote Generator</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
+  button { font: inherit; padding: .5rem 1rem; }
+  button:focus-visible { outline: 3px solid; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Stand By Me Quote Generator</h1>
+  <figure id="quote" aria-live="polite">
+    <blockquote><p id="quote-text">Press the button for a quote.</p></blockquote>
+    <figcaption id="quote-who"></figcaption>
+  </figure>
+  <button type="button" id="next">New quote</button>
+</main>
+<script>
+(function () {
+  "use strict";
+  var quotes = [
+    ["I was 12 going on 13 the first time I saw a dead human being.", "The Writer"],
+    ["You guys wanna go see a dead body?", "Vern"],
+    ["Mickey's a mouse, Donald's a duck, Pluto's a dog. What's Goofy?", "Vern"],
+    ["It's what they think of me. I'm just one of those low-life Chambers kids.", "Chris"],
+    ["I just wish that I could go someplace where nobody knows me.", "Chris"],
+    ["Friends come in and out of your life like busboys in a restaurant.", "The Writer"],
+    ["I never had any friends later on like the ones I had when I was 12.", "The Writer"]
+  ];
+  var textEl = document.getElementById("quote-text");
+  var whoEl = document.getElementById("quote-who");
+  var last = -1;
+
+  document.getElementById("next").addEventListener("click", function () {
+    var i;
+    do { i = Math.floor(Math.random() * quotes.length); } while (i === last && quotes.length > 1);
+    last = i;
+    textEl.textContent = quotes[i][0];
+    whoEl.textContent = "— " + quotes[i][1];
+  });
+})();
+</script>
+</body>
+</html>
